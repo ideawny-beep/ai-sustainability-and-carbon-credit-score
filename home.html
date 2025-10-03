@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack AI | Carbon Footprint Management Solution</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for custom colors and use Inter font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eco-green': '#22C55E', // Green-500
+                        'eco-dark': '#064E3B',  // Emerald-900
+                        'eco-light': '#D1FAE5', // Emerald-100
+                        'eco-blue': '#3B82F6',  // Blue-500
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Inter Font Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar styling for aesthetics */
+        body {
+            background-color: #f7fdfb; /* Very light green background */
+        }
+        .icon-svg {
+            stroke-width: 1.5;
+            width: 28px;
+            height: 28px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- EcoTrack Logo/Name -->
+                <svg class="w-8 h-8 text-eco-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2"></path>
+                </svg>
+                <span class="text-xl font-bold text-eco-dark">EcoTrack AI</span>
+            </div>
+            <!-- Navigation Links (Hidden on small screen, using mock links) -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#features" class="text-gray-600 hover:text-eco-green transition duration-150">Features</a>
+                <a href="#impact" class="text-gray-600 hover:text-eco-green transition duration-150">Our Impact</a>
+                <a href="#pricing" class="text-gray-600 hover:text-eco-green transition duration-150">Pricing</a>
+            </nav>
+            <a href="#cta" class="px-4 py-2 bg-eco-green text-white font-medium rounded-full hover:bg-eco-dark transition duration-300 shadow-lg hidden sm:inline-block">Get Started</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="py-16 md:py-24 bg-gradient-to-br from-eco-light to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="inline-block bg-eco-green/10 text-eco-green text-sm font-semibold px-4 py-1 rounded-full mb-4 uppercase tracking-wider">AI Powered Sustainability</span>
+                <h1 class="text-5xl sm:text-6xl font-extrabold text-eco-dark mb-4 leading-tight">
+                    Measure. Optimize. Compete.
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    EcoTrack AI provides the most accurate carbon footprint tracking, powered by advanced AI, across your travel, energy, and consumption habits. Turn good intentions into measurable action.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#cta" class="inline-block px-8 py-3 bg-eco-green text-white font-bold text-lg rounded-xl shadow-xl hover:bg-eco-dark transform hover:scale-[1.02] transition duration-300">
+                        Start Your Free Trial
+                    </a>
+                    <button class="inline-block px-8 py-3 bg-white text-eco-dark border border-eco-green font-semibold text-lg rounded-xl shadow-md hover:bg-eco-light transition duration-300">
+                       <a href="eco_friendly.html">Eco-Friendly Alternatives</a> 
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-3">Your Complete Carbon Toolkit</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        We break down your environmental impact and provide personalized pathways to zero-emissions living.
+                    </p>
+                </div>
+
+                <!-- Feature Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                    <!-- Feature 1: CO2 Estimation -->
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                        <div class="p-3 inline-block bg-eco-blue/10 rounded-xl mb-4">
+                            <!-- Carbon Icon -->
+                            <svg class="icon-svg text-eco-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18m0-18C6.477 3 2 7.477 2 13s4.477 10 10 10 10-4.477 10-10S17.523 3 12 3zM12 3a9.002 9.002 0 00-6.732 3.268m6.732-3.268a9.002 9.002 0 016.732 3.268m-6.732 17.464a9.002 9.002 0 006.732-3.268m-6.732 3.268a9.002 9.002 0 01-6.732-3.268" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Accurate CO₂ Tracking</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600 text-base">
+                            <li>Travel: Flights, car mileage, public transit.</li>
+                            <li>Home: Detailed electricity, gas, and water usage.</li>
+                            <li>Food: AI-estimated emissions based on dietary inputs.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 2: Personalized Alternatives -->
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                        <div class="p-3 inline-block bg-eco-green/10 rounded-xl mb-4">
+                            <!-- Bulb/Idea Icon -->
+                            <svg class="icon-svg text-eco-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6 1.134l-.868-.868m-.64 15.659l.867.868m-4.244-1.134h1.134m0 0a1.5 1.5 0 010-3h1.134m-1.134 3a1.5 1.5 0 000-3h-1.134m-6.866 2.268l.868-.868m-.868-.868l-.868.868M6 18h12a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Smart Eco-Friendly Suggestions</h3>
+                        <p class="text-gray-600 mb-4">
+                            Our AI analyzes your data and suggests practical, impactful changes:
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600 text-base">
+                            <li>Optimizing travel routes for lower emissions.</li>
+                            <li>Energy-saving appliance switch recommendations.</li>
+                            <li>Plant-based meal alternatives with equivalent nutrition.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Feature 3: Gamification & Impact -->
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 border border-gray-100">
+                        <div class="p-3 inline-block bg-eco-dark/10 rounded-xl mb-4">
+                            <!-- Trophy Icon -->
+                            <svg class="icon-svg text-eco-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.111a9.003 9.003 0 01-.947 11.758 9 9 0 01-11.802-1.928A9.001 9.001 0 013 12m18 0a9.001 9.001 0 00-9-9" stroke-width="2"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Gamified Progress & Leaderboards</h3>
+                        <p class="text-gray-600 mb-4">
+                            Make sustainability fun and competitive for individuals and teams:
+                        </p>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600 text-base">
+                            <li>Earn points for reducing emissions (e.g., opting for the train).</li>
+                            <li>Challenge colleagues/friends on monthly leaderboards.</li>
+                            <li>Unlock badges and sustainability achievements.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="bg-eco-dark text-white py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="inline-block bg-eco-green text-white text-sm font-semibold px-4 py-1 rounded-full mb-4 uppercase tracking-wider">Real-World Change</span>
+                        <h2 class="text-4xl font-extrabold mb-4">Quantifiable Environmental Impact</h2>
+                        <p class="text-lg text-gray-300 mb-6">
+                            Our platform isn't just about data; it's about measurable results. By providing clear, actionable insights, we help you translate complex climate science into daily habits. This delivers significant collective and corporate emission reductions.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-6 h-6 text-eco-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" stroke-width="2"></path></svg>
+                                <p class="text-gray-200">Applicable for individuals, SMBs, and large enterprises.</p>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <svg class="w-6 h-6 text-eco-green mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" stroke-width="2"></path></svg>
+                                <p class="text-gray-200">Data exportable for compliance and sustainability reports.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mock Data Visualization Image Placeholder -->
+                    <div class="relative bg-white/5 p-6 rounded-2xl shadow-inner border border-eco-green/50 aspect-video flex items-center justify-center">
+                        <p class="text-gray-400 text-center">Placeholder for AI Dashboard Screenshot / Data Visualization</p>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-eco-green/10 to-transparent rounded-2xl"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action (CTA) Section -->
+        <section id="cta" class="py-16 md:py-24">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 bg-white p-8 sm:p-12 rounded-3xl shadow-2xl border-t-4 border-eco-green text-center">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">Ready to Track Your Footprint?</h2>
+                <p class="text-xl text-gray-600 mb-8">
+                    Join the movement of climate-conscious individuals and organizations. It only takes two minutes to set up your account.
+                </p>
+
+                <!-- Signup Form -->
+                <form id="signup-form" class="max-w-lg mx-auto space-y-4">
+                    <input type="email" id="email" required placeholder="Enter your work email address"
+                           class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-eco-green focus:border-eco-green transition duration-150 shadow-sm"
+                           aria-label="Email address for signup">
+                    <button type="submit"
+                            class="w-full px-5 py-3 bg-eco-green text-white font-bold text-lg rounded-xl hover:bg-eco-dark transition duration-300 transform hover:shadow-lg">
+                         <a href="calculator.html">Sign Up for Free</a>
+                    </button>
+                </form>
+
+                <!-- Success Message Box -->
+                <div id="success-message" class="hidden mt-6 bg-green-100 border-l-4 border-eco-green text-green-700 p-4 rounded-lg" role="alert">
+                    <p class="font-bold">Success!</p>
+                    <p>We've sent a registration link to your email. Check your inbox and start tracking!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex justify-center items-center space-x-2 mb-4">
+                <svg class="w-6 h-6 text-eco-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2"></path>
+                </svg>
+                <span class="text-lg font-semibold text-white">EcoTrack AI</span>
+            </div>
+            <p class="text-sm text-gray-400">&copy; 2025 EcoTrack AI. All rights reserved. | Building a Net-Zero Future.</p>
+            <div class="mt-4 space-x-4 text-sm">
+                <a href="#" class="text-gray-400 hover:text-eco-green">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-eco-green">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for handling the mock signup form
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('signup-form');
+            const successMessage = document.getElementById('success-message');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 1. Hide the form
+                form.classList.add('hidden');
+
+                // 2. Show the success message
+                successMessage.classList.remove('hidden');
+
+                // In a real application, you would send data to a server here.
+                console.log('Mock signup submitted for email:', document.getElementById('email').value);
+
+                // Optional: Re-show the form after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                    form.classList.remove('hidden');
+                    form.reset();
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

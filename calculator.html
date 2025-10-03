@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack AI | Carbon Footprint Calculator</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js CDN for the Pie Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <!-- Configure Tailwind for custom colors and use Inter font -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'eco-green': '#22C55E', // Green-500
+                        'eco-dark': '#064E3B',  // Emerald-900
+                        'eco-light': '#D1FAE5', // Emerald-100
+                        'eco-blue': '#3B82F6',  // Blue-500
+                        'eco-red': '#EF4444',   // Red-500 for meat
+                        'eco-yellow': '#FBBF24', // Amber-400 for electricity
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Inter Font Import -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7fdfb; 
+        }
+        .icon-svg {
+            stroke-width: 1.5;
+            width: 28px;
+            height: 28px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-80ulu">
+
+    <!-- Navigation Bar (Simple for this page) -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- Link back to the main page -->
+                <a href="index.html" class="text-xl font-bold text-eco-dark flex items-center hover:text-eco-green transition duration-150">
+                    <svg class="w-8 h-8 text-eco-green mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2"></path>
+                    </svg>
+                    EcoTrack AI
+                </a>
+            </div>
+            <a href="home.html" class="px-4 py-2 bg-eco-green text-white font-medium rounded-full hover:bg-eco-dark transition duration-300 shadow-lg">Back to home</a>
+        </div>
+    </header>
+
+    <!-- Carbon Footprint Calculator Section -->
+    <section class="py-16 md:py-24 bg-eco-light/50 border-t border-b border-eco-green/30 min-h-[85vh] flex items-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center mb-12">
+                <!-- Using HTML subscript for CO2 -->
+                <h1 class="text-4xl font-extrabold text-eco-dark mb-3">Instant CO<sub>2</sub> Footprint Calculator</h1>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                    Use our quick demo to see how your current habits impact the planet (estimates based on global averages).
+                </p>
+            </div>
+            
+            <div class="bg-white p-8 rounded-3xl shadow-2xl border border-gray-100">
+                <form id="footprint-calculator" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Input 1: Car Travel -->
+                    <div>
+                        <label for="car-miles" class="block text-sm font-medium text-gray-700 mb-2">Monthly Car Travel (Miles)</label>
+                        <input type="number" id="car-miles" value="0" placeholder="e.g., 500" min="0" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-eco-green focus:border-eco-green transition"
+                            aria-label="Monthly car miles driven">
+                        <p class="text-xs text-gray-500 mt-1">Approx. 0.2 kg CO<sub>2</sub> per mile</p>
+                    </div>
+
+                    <!-- Input 2: Electricity Usage -->
+                    <div>
+                        <label for="electricity-kwh" class="block text-sm font-medium text-gray-700 mb-2">Monthly Electricity Usage (kWh)</label>
+                        <input type="number" id="electricity-kwh" value="0" placeholder="e.g., 300" min="0" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-eco-green focus:border-eco-green transition"
+                            aria-label="Monthly electricity usage in kWh">
+                        <p class="text-xs text-gray-500 mt-1">Approx. 0.4 kg CO<sub>2</sub> per kWh (Varies by grid)</p>
+                    </div>
+
+                    <!-- Input 3: Red Meat Consumption -->
+                    <div>
+                        <label for="meat-meals" class="block text-sm font-medium text-gray-700 mb-2">Red Meat Meals (Per Month)</label>
+                        <input type="number" id="meat-meals" value="0" placeholder="e.g., 8" min="0" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-eco-green focus:border-eco-green transition"
+                            aria-label="Number of red meat meals per month">
+                        <p class="text-xs text-gray-500 mt-1">High estimated footprint (kg CO<sub>2</sub>) per meal</p>
+                    </div>
+
+                    <!-- Spacer for alignment -->
+                    <div class="hidden md:block"></div>
+
+                    <!-- Submit Button -->
+                    <div class="md:col-span-2 mt-4">
+                        <button type="submit" id="calculate-btn"
+                            class="w-full px-8 py-3 bg-eco-blue text-white font-bold text-lg rounded-xl shadow-lg hover:bg-eco-dark transition duration-300 transform hover:scale-[1.01]">
+                            Calculate My Monthly Footprint
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results Display - Now includes the chart -->
+                <div id="results-box" class="mt-8 p-6 md:p-8 bg-eco-dark rounded-2xl text-white hidden">
+                    <p class="text-xl font-extrabold text-eco-green mb-4 text-center">Your Monthly CO<sub>2</sub> Footprint Breakdown</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                        <!-- Total Result and Tip (Left Column - Numerical) -->
+                        <div class="lg:col-span-1 text-center order-2 lg:order-1">
+                            <p class="text-lg font-semibold uppercase opacity-80">Total Emissions</p>
+                            <h3 class="text-5xl font-extrabold my-2 flex items-center justify-center">
+                                <span id="total-co2">0.0</span>
+                                <span class="ml-2 text-2xl text-eco-green">kg CO<sub>2</sub></span>
+                            </h3>
+                            <p id="savings-tip" class="text-eco-light text-sm italic mt-4"></p>
+                        </div>
+                        
+                        <!-- Pie Chart (Right Column - Visual) -->
+                        <div class="lg:col-span-2 relative h-64 w-full order-1 lg:order-2">
+                             <canvas id="footprintChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alternative Suggestion Box (will be filled by JS) -->
+                <div id="suggestion-box" class="mt-4 p-4 border border-eco-green rounded-xl bg-eco-green/10 text-eco-dark hidden">
+                    <p class="font-bold">EcoTrack AI Suggestion:</p>
+                    <p id="suggestion-text" class="text-sm mt-1"></p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Simple for this page) -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm text-gray-400">&copy; 2025 EcoTrack AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calcForm = document.getElementById('footprint-calculator');
+            const resultsBox = document.getElementById('results-box');
+            const totalCo2Span = document.getElementById('total-co2');
+            const savingsTip = document.getElementById('savings-tip');
+            const suggestionBox = document.getElementById('suggestion-box');
+            const suggestionText = document.getElementById('suggestion-text');
+
+            // Variable to hold the Chart.js instance
+            let myChart = null; 
+
+            // Conversion factors (in kg CO2 per unit, for demonstration)
+            const FACTORS = {
+                CAR_MILE: 0.2,   
+                ELECTRICITY_KWH: 0.4, 
+                RED_MEAT_MEAL: 7.0 
+            };
+
+            const TIPS = [
+                // Using Unicode subscript CO₂
+                "Taking the train instead of driving 500 miles saves approximately 100 kg CO₂!",
+                "Switching to a renewable energy supplier can eliminate your electricity footprint.",
+                "Reducing your red meat intake by 50% could save you around 28 kg CO₂ per month.",
+                "Your biggest potential saving might be in your travel habits—check out public transport options!",
+                "Try going meatless one day a week to significantly lower your food-related emissions."
+            ];
+
+            // Function to initialize or update the Chart.js pie chart
+            function updateChart(carCo2, electricCo2, foodCo2) {
+                const ctx = document.getElementById('footprintChart').getContext('2d');
+                const data = [carCo2, electricCo2, foodCo2];
+                const labels = ['Car Travel', 'Electricity', 'Red Meat'];
+                
+                // --- IMPROVED COLOR PALETTE FOR VISUAL IMPACT ---
+                const backgroundColors = [
+                    '#3B82F6', // Eco-Blue (Travel)
+                    '#FBBF24', // Eco-Yellow (Electricity)
+                    '#EF4444'  // Eco-Red (Meat)
+                ];
+                const hoverBackgroundColors = [
+                    '#2563EB', // Slightly darker Blue on hover
+                    '#D97706', // Slightly darker Amber on hover
+                    '#DC2626'  // Slightly darker Red on hover
+                ];
+                // Use white border for strong separation against the dark green background
+                const borderColor = '#FFFFFF'; 
+
+                if (myChart) {
+                    // Update existing chart
+                    myChart.data.datasets[0].data = data;
+                    myChart.data.datasets[0].backgroundColor = backgroundColors;
+                    myChart.data.datasets[0].hoverBackgroundColor = hoverBackgroundColors;
+                    myChart.update();
+                } else {
+                    // Initialize new chart
+                    myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data: data,
+                                backgroundColor: backgroundColors,
+                                hoverBackgroundColor: hoverBackgroundColors,
+                                borderColor: borderColor,
+                                borderWidth: 2,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false, 
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        color: 'white',
+                                        font: {
+                                            size: 14,
+                                            weight: '600' // Bold font for better readability
+                                        },
+                                        boxWidth: 20,
+                                        padding: 20
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            // Tooltip shows category, percentage, and value in kg CO₂
+                                            const total = context.dataset.data.reduce((sum, value) => sum + value, 0);
+                                            const value = context.parsed;
+                                            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) + '%' : '0%';
+                                            
+                                            let label = context.label || '';
+                                            if (label) { label += ': '; }
+                                            
+                                            return `${label} ${value.toFixed(1)} kg CO₂ (${percentage})`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            // Function to handle the calculation
+            function calculateFootprint(e) {
+                if (e) e.preventDefault();
+                
+                // Get values and ensure they are numbers
+                const carMiles = parseFloat(document.getElementById('car-miles').value) || 0;
+                const electricityKwh = parseFloat(document.getElementById('electricity-kwh').value) || 0;
+                const meatMeals = parseFloat(document.getElementById('meat-meals').value) || 0;
+
+                // Calculate emissions for each category
+                const carCo2 = carMiles * FACTORS.CAR_MILE;
+                const electricCo2 = electricityKwh * FACTORS.ELECTRICITY_KWH;
+                const foodCo2 = meatMeals * FACTORS.RED_MEAT_MEAL;
+
+                // Calculate total CO2
+                const totalCo2 = carCo2 + electricCo2 + foodCo2;
+
+                // Update the results display
+                totalCo2Span.textContent = totalCo2.toFixed(1);
+                resultsBox.classList.remove('hidden');
+
+                // Update the visual chart
+                updateChart(carCo2, electricCo2, foodCo2);
+
+                // Generate a personalized (mock) suggestion
+                const highestImpact = Math.max(carCo2, electricCo2, foodCo2);
+                let tipIndex = Math.floor(Math.random() * TIPS.length); 
+                
+                if (highestImpact === carCo2 && carCo2 > 0) {
+                    suggestionText.textContent = `Your travel emissions (${carCo2.toFixed(1)} kg CO₂) are a significant factor. Consider public transport, carpooling, or electric vehicles to see major reductions.`;
+                } else if (highestImpact === electricCo2 && electricCo2 > 0) {
+                    suggestionText.textContent = `Your electricity usage (${electricCo2.toFixed(1)} kg CO₂) is your highest contributor. Look into switching to energy-efficient appliances or a clean energy plan.`;
+                } else if (highestImpact === foodCo2 && foodCo2 > 0) {
+                    suggestionText.textContent = `Your food choices (${foodCo2.toFixed(1)} kg CO₂) are driving your footprint. Try replacing two red meat meals a month with plant-based alternatives!`;
+                } else {
+                    // Fallback or general encouragement
+                    suggestionText.textContent = "Great job keeping your inputs low! Log in to EcoTrack AI to get personalized, location-specific advice for even deeper cuts.";
+                }
+
+                // Display a random, general tip
+                savingsTip.textContent = TIPS[tipIndex];
+
+                suggestionBox.classList.remove('hidden');
+            }
+
+            // Attach event listener to the calculator form
+            calcForm.addEventListener('submit', calculateFootprint);
+
+            // Run initial calculation when the page loads to show the default values
+            if (calcForm) {
+                calculateFootprint(); 
+            }
+        });
+    </script>
+</body>
+</html>
